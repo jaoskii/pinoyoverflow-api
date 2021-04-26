@@ -7,7 +7,7 @@ var { qryManager } = require('../../customs/qrymanager')
 /* GET home page. */
 router.get('/login', function(req, res, next) {
   let qry = new qryManager()
-  qry.opentable();
+  qry.opentable('qry',[]);
   res.json({ username: 'Flavio' })
 });
 
