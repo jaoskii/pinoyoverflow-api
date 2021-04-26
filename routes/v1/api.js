@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+//try to export qrymanager class
+var { qryManager } = require('../../customs/qrymanager')
+
 /* GET home page. */
-router.post('/login', function(req, res, next) {
+router.get('/login', function(req, res, next) {
+  let qry = new qryManager()
+  qry.opentable();
   res.json({ username: 'Flavio' })
 });
 

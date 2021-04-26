@@ -8,6 +8,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users'); 
 */
+
+//try to export query class manager
+//var qryManager = require('./customs/qrymanager')
 var api_routerv1 = require('./routes/v1/api')
 
 var app = express();
