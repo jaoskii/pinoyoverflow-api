@@ -11,7 +11,7 @@ const passman = new passwordManager();
 
 /* GET home page. */
 router.post('/login', function(req, res, next) {
-  console.log(req.body);
+  
   // generate salt to hash password
   /* let password = 'jaoski12345';
   let passvalues = passman.hashPassword(password); */
