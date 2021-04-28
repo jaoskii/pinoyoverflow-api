@@ -7,9 +7,11 @@ var jwt = require('jsonwebtoken'); //jwt token
 
 var { qryManager } = require('../../customs/qrymanager')
 var { passwordManager } = require('../../customs/passwordManager');
+var { utilityBank } = require('../../customs/utilityBank');
 
 const queryman = new qryManager()
 const passman = new passwordManager();
+const utilman = new utilityBank();
 
 var upload = multer()
 
@@ -29,7 +31,16 @@ router.post('/login', upload.none(), function(req, res, next) {
       res.json({'msg': 'Account not found with username/email: ' + req.body['userhook']});
     }else{
       if(passman.comparePasswords(req.body['password'],resultset[0].password)){
-        //jwt.sign(resultset[0],)
+        resultset = utilman.convert2Object(resultset);
+        let token = jwt.sign(resultset[0],process.env.JWT_SECRET);
+        res.json({
+          'msg': "You are successfully logged in.",
+          "token": token,
+          "add_info": {
+            "name": resultset[0]['name'],
+            "username": resultset[0]['username']
+          }
+        });
       }else{
         res.json({'msg': 'Seems your password is incorrect. Please try again.'});
       }//end if
