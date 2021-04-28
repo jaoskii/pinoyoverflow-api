@@ -13,7 +13,7 @@ var usersRouter = require('./routes/users');
 
 //try to export query class manager
 //var qryManager = require('./customs/qrymanager')
-var api_routerv1 = require('./routes/v1/api')
+var authapi_v1 = require('./routes/v1/auth')
 
 var app = express();
 
@@ -34,7 +34,9 @@ app.use(express.urlencoded()); */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 */
-app.use('/api/v1', api_routerv1);
+
+//v1 API's
+app.use('/api/v1/auth', authapi_v1);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

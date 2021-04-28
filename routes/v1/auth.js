@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer  = require('multer') //for multiform data parsing
 var jwt = require('jsonwebtoken'); //jwt token
-//try to export qrymanager class
-//var { coreFunctions } = require('../../customs/sample'); //Sample class functions
 
+//custom classes
 var { qryManager } = require('../../customs/qrymanager')
 var { passwordManager } = require('../../customs/passwordManager');
 var { utilityBank } = require('../../customs/utilityBank');
@@ -12,10 +11,8 @@ var { utilityBank } = require('../../customs/utilityBank');
 const queryman = new qryManager()
 const passman = new passwordManager();
 const utilman = new utilityBank();
+const upload = multer()
 
-var upload = multer()
-
-/* GET home page. */
 router.post('/login', upload.none(), function(req, res, next) {
   // generate salt to hash password
   req_fields = ['userhook','password'];
@@ -46,8 +43,7 @@ router.post('/login', upload.none(), function(req, res, next) {
       }//end if
     }//end if
   });
-
-  //res.json({ username: 'Flavio' })
 });
+
 
 module.exports = router;
