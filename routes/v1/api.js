@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var multer  = require('multer')
-
+var multer  = require('multer') //for multiform data parsing
+var jwt = require('jsonwebtoken'); //jwt token
 //try to export qrymanager class
 //var { coreFunctions } = require('../../customs/sample'); //Sample class functions
+
 var { qryManager } = require('../../customs/qrymanager')
 var { passwordManager } = require('../../customs/passwordManager');
 
@@ -14,18 +15,28 @@ var upload = multer()
 
 /* GET home page. */
 router.post('/login', upload.none(), function(req, res, next) {
-  console.log(req.body.userhook);
   // generate salt to hash password
-  /* let password = 'jaoski12345';
-  let passvalues = passman.hashPassword(password); */
+  req_fields = ['userhook','password'];
   
-  /*  queryman.executeQry('select id,name from tbl_tester',[]).then(res => {
-    res.forEach(rows => {
-      console.log(rows.name);
-    });
+  req_fields.forEach(key => {
+    if(req.body[key] == "" || req.body[key] == undefined){
+      res.json({'msg': 'Please fill up all required fields.','fields': req_fields});
+    }//end if
   });
- */
-  res.json({ username: 'Flavio' })
+  
+  queryman.executeQry('select `id`,`email`,`name`,`username`,`status`,`rank`,`password` from tbl_users where (`username` = ?  or `email` = ?)', [req.body['userhook'],req.body['userhook']]).then(resultset => {
+    if(resultset.length == 0){      
+      res.json({'msg': 'Account not found with username/email: ' + req.body['userhook']});
+    }else{
+      if(passman.comparePasswords(req.body['password'],resultset[0].password)){
+        //jwt.sign(resultset[0],)
+      }else{
+        res.json({'msg': 'Seems your password is incorrect. Please try again.'});
+      }//end if
+    }//end if
+  });
+
+  //res.json({ username: 'Flavio' })
 });
 
 module.exports = router;
