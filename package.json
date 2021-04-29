@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon ./bin/www",
     "docs": "apidoc -i ./routes -e node_modules/ -o ./public/docs"
   },
   "apidoc": {
     "name": "Pinoy Overflow API",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "title": "Pinoy Overflow API",
-    "url" : "https://api.github.com/api",
-    "useHostUrlAsSampleUrl": true
+    "url": "http://localhost:3000/api",
+    "sampleUrl": "http://localhost:3000/api"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

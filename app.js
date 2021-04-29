@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //DOCUMENTATIONS
-//app.use('/api/docs', express.static(__dirname + '/public/docs'));
+app.use('/api/docs', express.static(__dirname + '/public/docs'));
 
 //v1 API's
 app.use('/api/v1/auth', authapi_v1);
