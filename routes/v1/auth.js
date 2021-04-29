@@ -62,7 +62,7 @@ router.post('/login', upload.none(), function(req, res, next) {
   });
 });//end route
 
-router.post('/me',[reqhandler.verifyUserAccess], (req, res) => {
+router.get('/me',[reqhandler.verifyUserAccess], (req, res) => {
   if(!jwtman.verify(req.token)){
     res.status(statusCodes.forbidden).json({
       'msg': 'Access token invalid. Access forbidden',
