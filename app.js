@@ -6,11 +6,6 @@ var logger = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
-/* 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users'); 
-*/
-
 //try to export query class manager
 //var qryManager = require('./customs/qrymanager')
 var authapi_v1 = require('./routes/v1/auth')
@@ -27,13 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* app.use(express.json());
-app.use(express.urlencoded()); */
-
-/* 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-*/
+//DOCUMENTATIONS
+app.use('/api/docs', express.static(__dirname + '/public/docs'));
 
 //v1 API's
 app.use('/api/v1/auth', authapi_v1);

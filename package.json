@@ -1,9 +1,17 @@
 {
-  "name": "expapp",
+  "name": "pinoyoverflow-api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www",
+    "docs": "apidoc -i ./routes -e node_modules/ -o ./public/docs"
+  },
+  "apidoc": {
+    "name": "Pinoy Overflow API",
+    "version": "1.0.0",
+    "title": "Pinoy Overflow API",
+    "url": "http://localhost:3000/api",
+    "sampleUrl": "http://localhost:3000/api"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
