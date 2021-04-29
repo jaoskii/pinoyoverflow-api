@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const dotenv = require('dotenv');
+const helmet = require("helmet");
 dotenv.config();
 
 //try to export query class manager
@@ -11,6 +12,8 @@ dotenv.config();
 var authapi_v1 = require('./routes/v1/auth')
 
 var app = express();
+
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
